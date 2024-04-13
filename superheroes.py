@@ -2,7 +2,7 @@ import requests
 from pprint import pprint
 
 
-def get_the_smartest_superhero() -> str:
+def get_the_smartest_superhero_from_list() -> str:
     the_smartest_superhero = ''
     intelligence = 0
     base_url = "https://akabab.github.io/superhero-api/api"
@@ -17,4 +17,15 @@ def get_the_smartest_superhero() -> str:
             the_smartest_superhero = hero['name']
     return the_smartest_superhero
 
-print(get_the_smartest_superhero())
+def get_the_smartest_superhero(superheros: list):
+   the_smartest_superhero = ''
+   max_intelligence = 0
+   base_url = "https://akabab.github.io/superhero-api/api"
+   for hero_id in superheros:
+       url = base_url + f'/id/{hero_id}.json'
+       response = requests.get(url)
+       hero_info = response.json()
+       if hero_info['powerstats']['intelligence'] > max_intelligence:
+           max_intelligence = hero_info['powerstats']['intelligence']
+           the_smartest_superhero = hero_info['name']
+   return the_smartest_superhero
