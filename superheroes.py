@@ -1,6 +1,5 @@
 import requests
 from pprint import pprint
-import json
 
 
 def get_the_smartest_superhero() -> str:
